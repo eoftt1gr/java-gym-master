@@ -1,7 +1,6 @@
 package ru.yandex.practicum.gym;
 
 public class TrainingSession {
-
     //группа
     private Group group;
     //тренер
@@ -32,5 +31,15 @@ public class TrainingSession {
 
     public TimeOfDay getTimeOfDay() {
         return timeOfDay;
+    }
+
+    @Override
+    public String toString() {
+        return "TrainingSession{" +
+                "group=" + group +
+                ", coach=" + coach +
+                ", dayOfWeek=" + dayOfWeek +
+                ", timeOfDay=" + timeOfDay +
+                '}';
     }
 }
