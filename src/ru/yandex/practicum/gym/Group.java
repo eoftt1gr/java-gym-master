@@ -5,6 +5,16 @@ public class Group {
     private String title;
     //тип (взрослая или детская)
     private Age age;
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "title='" + title + '\'' +
+                ", age=" + age +
+                ", duration=" + duration +
+                '}';
+    }
+
     //длительность (в минутах)
     private int duration;
 
