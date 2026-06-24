@@ -23,7 +23,7 @@ public class TimetableTest {
         //Проверить, что за вторник не вернулось занятий
         sessions = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
 
-        Assertions.assertEquals(0, sessions.size());
+        Assertions.assertTrue(sessions.isEmpty());
     }
 
     @Test
@@ -60,7 +60,7 @@ public class TimetableTest {
         System.out.println("--------------------------------------------------------" + "\n\n\n");
         // Проверить, что за вторник не вернулось занятий
         sessions = timetable.getTrainingSessionsForDay(DayOfWeek.TUESDAY);
-        Assertions.assertEquals(0, sessions.size());
+        Assertions.assertTrue(sessions.isEmpty());
     }
 
     @Test
@@ -79,7 +79,27 @@ public class TimetableTest {
         Assertions.assertEquals(1, sessions.size());
         //Проверить, что за понедельник в 14:00 не вернулось занятий
         sessions = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(14, 0));
-        Assertions.assertEquals(0, sessions.size());
+        Assertions.assertTrue(sessions.isEmpty());
+    }
+
+    @Test
+    void testGetTrainingSessionsForDayAndTimeAtTheTime() {
+        Timetable timetable = new Timetable();
+
+        Group group = new Group("Акробатика для детей", Age.CHILD, 60);
+        Coach coach1 = new Coach("Васильев", "Николай", "Сергеевич");
+        Coach coach2 = new Coach("Биляева", "Алина", "Сергеевна");
+        TrainingSession singleTrainingSession1 = new TrainingSession(group, coach1,
+                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+        TrainingSession singleTrainingSession2 = new TrainingSession(group, coach2,
+                DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+
+        timetable.addNewTrainingSession(singleTrainingSession1);
+        timetable.addNewTrainingSession(singleTrainingSession2);
+
+        List<TrainingSession> sessions = timetable.getTrainingSessionsForDayAndTime(DayOfWeek.MONDAY, new TimeOfDay(13, 0));
+        Assertions.assertEquals(2, sessions.size());
+        System.out.println(sessions);
     }
 
     @Test
@@ -167,7 +187,7 @@ public class TimetableTest {
         Assertions.assertEquals(5, listOfCoaches.size());
         Assertions.assertEquals(coach3, listOfCoaches.get(0).getCoach());
         Assertions.assertEquals(coach4, listOfCoaches.get(1).getCoach());
-        Assertions.assertEquals(coach5, listOfCoaches.get(2).getCoach());
+        Assertions.assertEquals(coach1, listOfCoaches.get(2).getCoach());
 
         System.out.println(listOfCoaches);
         System.out.println("--------------------------------------------------------" + "\n\n\n");
@@ -227,8 +247,8 @@ public class TimetableTest {
         Assertions.assertEquals(5, listOfCoaches.size());
         Assertions.assertEquals(coach3, listOfCoaches.get(0).getCoach());
         Assertions.assertEquals(coach4, listOfCoaches.get(1).getCoach());
-        Assertions.assertEquals(coach5, listOfCoaches.get(2).getCoach());
-        Assertions.assertEquals(coach1, listOfCoaches.get(3).getCoach());
+        Assertions.assertEquals(coach1, listOfCoaches.get(2).getCoach());
+        Assertions.assertEquals(coach5, listOfCoaches.get(3).getCoach());
         Assertions.assertEquals(coach2, listOfCoaches.get(4).getCoach());
 
         System.out.println(listOfCoaches);
