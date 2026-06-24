@@ -5,7 +5,6 @@ import java.util.*;
 public class Timetable {
 
     private Map<DayOfWeek, Map<TimeOfDay, List<TrainingSession>>> timetable = new HashMap<>();
-//    private Map<DayOfWeek, List<TrainingSession>> sessionsByDay = new HashMap<>();
     private Map<Coach, CounterOfTrainings> trainingsByCoach = new HashMap<>();
 
     public void addNewTrainingSession(TrainingSession trainingSession) {
